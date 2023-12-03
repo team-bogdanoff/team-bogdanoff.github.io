@@ -1,0 +1,50 @@
+article {
+  max-width: 90vw;
+  margin: 0 auto;
+}
+body {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+  padding: 5px 5px 20px;
+}
+.selectable {
+  -webkit-touch-callout: text; /* iOS Safari */
+  -webkit-user-select: text; /* Safari */
+  -khtml-user-select: text; /* Konqueror HTML */
+  -moz-user-select: text; /* Old versions of Firefox */
+  -ms-user-select: text; /* Internet Explorer/Edge */
+  user-select: text; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+.selectable-all {
+  -webkit-touch-callout: all; /* iOS Safari */
+  -webkit-user-select: all; /* Safari */
+  -khtml-user-select: all; /* Konqueror HTML */
+  -moz-user-select: all; /* Old versions of Firefox */
+  -ms-user-select: all; /* Internet Explorer/Edge */
+  user-select: all; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+.copypasta {
+  background-color: #dfdfdf;
+  padding: 5px 30px;
+  border-radius: 5px;
+}
+p.heading{
+  font-size: 1.2em;
+}
+ol.protocol{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ol.protocol li {
+  margin-bottom: 10px;
+}
+@media (min-width: 720px) {
+  article {
+    max-width: 650px;
+  }
+}
