@@ -12,7 +12,7 @@ body {
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-  padding: 5px 5px 20px;
+  padding: 5px 5px 40px;
 }
 main {
   width: 90vw;
@@ -21,7 +21,7 @@ main {
 }
 article {
   max-width: 650px;
-  margin: 0 auto;
+  margin: 0 auto 35px;
 }
 .selectable {
   -webkit-touch-callout: text; /* iOS Safari */
@@ -60,6 +60,35 @@ ul.bogpill-link-container li a {
   display: inline-block;
   text-decoration: none;
 }
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.align-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+small#clipboard-status {
+  text-align: center;
+  min-width: 10px;
+  min-height: 10px;
+}
+small[data-failed] {
+  color: red;
+}
+section[aria-labelledby=c2c] > *{
+  flex-grow: 0;
+}
+button#c2c {
+  margin: 0 auto 5px;
+  font-size: .9em;
+}
 @media (max-width: 720px) {
   article {
     max-width: 90vw;
@@ -91,5 +120,11 @@ ul.bogpill-link-container li a {
     text-align: center;
     padding: 10px 15px;
     align-items: center;
+  }
+  button#c2c {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    border-radius: var(--border-radius);
+    margin: 0 auto 5px;
   }
 }
