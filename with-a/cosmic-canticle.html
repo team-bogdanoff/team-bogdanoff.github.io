@@ -13,8 +13,8 @@
         <h1 class="selectable">Cosmic Canticle</h1>
         <p>a.k.a. "Bogda Bogdanov" by Cyril Hanouna</p>
       </hgroup>
-      <section class="copypasta selectable-all">
-        <pre>
+      <section class="selectable-all">
+        <pre class="copypasta">
 Vous imagine cet été,
 tout le monde dans les boites tout ça
 Et tout le monde et on va voir le DJ
@@ -136,10 +136,13 @@ Eh les gars cuand je viendrai chez vous,
 Vous avez un porte-mentons pour moi?
 Merci les gars j'vous kiffe 
         </pre>
-
-
       </section>
     </article>
+    <section aria-labelledby="c2c" class="flex-col justify-center">
+      <button type="button" id="c2c" data-bogpost-format="canticle">Copy to Clipboard</button>
+      <small id="clipboard-status"></small>
+    </section>
+    <script src="../main.js" defer></script>
   </main>
 </body>
 </html>
