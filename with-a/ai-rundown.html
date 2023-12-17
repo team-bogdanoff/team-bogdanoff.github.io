@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>AI Rundown</title>
+  <link rel="stylesheet" type="text/css" href="../base-styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    main {
+      text-align: center;
+    }
+
+    #responseSection {
+      margin-bottom: 10px; /* Add margin between response and button */
+    }
+
+    #repeatSection {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #repeatRequest {
+      max-width: 150px;
+      margin-top: 10px; /* Adjust the margin as needed */
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article>
+      <h1 class="selectable">AI Rundown</h1>
+      <section id="responseSection" class="flex-col justify-center copypasta selectable">
+        Generating Rundown...
+      </section>
+    </article>
+    <section id="repeatSection" aria-labelledby="c2c" class="flex-col justify-center">
+      <button type="button" id="repeatRequest" style="display: none;">New Rundown</button>
+      <button type="button" id="c2c" data-bogpost-format="standard" style="display: none;">Copy to Clipboard</button>
+      <small id="clipboard-status"></small>
+    </section>
+    <script src="../main.js" defer=""></script>
+    <script>
+      function makeRequest() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://gemini-proxy-nine.vercel.app/api/proxy', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        var requestData = {
+          contents: [{
+            role: 'nothing to see here 😜',
+          }],
+        };
+
+        // Display loading message
+        var responseSection = document.getElementById('responseSection');
+        responseSection.textContent = 'Generating Rundown...';
+
+        xhr.onload = function() {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            // Handle successful response
+            var response = JSON.parse(xhr.responseText);
+
+            if (response.candidates && response.candidates.length > 0) {
+              var candidatesContent = response.candidates.map(function(candidate) {
+                return '<p>' + candidate.content.parts[0].text + '</p>';
+              }).join('\n\n');
+
+              responseSection.innerHTML = candidatesContent;
+
+              // Show Copy to Clipboard and Repeat Request buttons
+              document.getElementById('c2c').style.display = 'inline-block';
+              document.getElementById('repeatRequest').style.display = 'inline-block';
+            } else {
+              console.error("Invalid response format");
+              responseSection.textContent = "Error processing response.";
+            }
+          } else {
+            console.error(xhr.statusText);
+            responseSection.textContent = "Error: " + xhr.statusText;
+          }
+        };
+
+        xhr.send(JSON.stringify(requestData));
+      }
+
+      // Call makeRequest function when the page is loaded
+      document.addEventListener('DOMContentLoaded', makeRequest);
+
+      // Repeat Request button event listener
+      document.getElementById('repeatRequest').addEventListener('click', makeRequest);
+    </script>
+  </main>
+</body>
+</html>
