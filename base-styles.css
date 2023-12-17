@@ -52,7 +52,7 @@ ol.protocol li {
   margin-bottom: 10px;
 }
 ul.bogpill-link-container li {
-  margin: 10px 0;
+  margin: 7px 0;
 }
 ul.bogpill-link-container li a {
   user-select: none;
@@ -85,6 +85,9 @@ small[data-failed] {
 section[aria-labelledby=c2c] > *{
   flex-grow: 0;
 }
+section.homepage {
+  margin: 30px auto;
+}
 button#c2c {
   margin: 0 auto 5px;
   font-size: .9em;
@@ -93,8 +96,8 @@ button#c2c {
   article {
     max-width: 90vw;
   }
-  h3 {
-    font-size: 1.5em;
+  h2 {
+    font-size: 1.75em;
     text-align: center;
   }
   p, ol.protocol li {
@@ -115,10 +118,9 @@ button#c2c {
     justify-content: center;
   }
   ul.bogpill-link-container li a {
-    width: 80vw;
     font-size: 1.275em;
     text-align: center;
-    padding: 10px 15px;
+    padding: 7px 20px;
     align-items: center;
   }
   button#c2c {
