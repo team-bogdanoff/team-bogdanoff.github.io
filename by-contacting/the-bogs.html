@@ -7,47 +7,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       height: 100vh;
+      padding-bottom: 5px;
       margin: 0;
     }
-
     main {
+      max-height: 100%;
+      overflow-y: hidden;
+    }
+    h1 {
       text-align: center;
     }
-
     #responseSection {
-      margin-bottom: 10px; /* Add margin between response and button */
+      padding: 5px 15px;
+      margin-bottom: 15px;
     }
-
     #repeatSection {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      gap: 5px;
     }
-
-    #repeatRequest {
-      max-width: 150px;
-      margin-top: 10px; /* Adjust the margin as needed */
-      margin-bottom: 10px;
+    @media (max-width: 720px) {
+      #responseSection[data-loaded=true] {
+        overflow-y: scroll;
+        background-color: #eee;
+        box-shadow: inset 0 0 7px 2px #CCC;
+      }
+      #repeatSection {
+        flex-direction: row;
+        padding-bottom: 20px;
+      }
+      #clipboard-status{
+        grid-column: 2;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
     }
   </style>
 </head>
-<body>
-  <main>
-    <article>
-      <h1 class="selectable">Make a Direct Connection to the Bogdanoffs</h1>
-      <section id="responseSection" class="flex-col justify-center copypasta selectable">
-        Attempting to make contact...
-      </section>
-    </article>
-    <section id="repeatSection" aria-labelledby="c2c" class="flex-col justify-center">
-      <button type="button" id="repeatRequest" style="display: none;">Request a new Bogpill</button>
-      <button type="button" id="c2c" data-bogpost-format="standard" style="display: none;">Copy to Clipboard</button>
-      <small id="clipboard-status"></small>
+<body class="flex-col">
+  <main class="flex-col flex-1">
+    <h1 class="selectable">Make a Direct Connection to the Bogdanoffs</h1>
+    <section id="responseSection" data-loaded="false" class="flex-1 justify-center copypasta selectable">
+      Attempting to make contact...
+    </section>
+    <section id="repeatSection">
+      <button type="button" id="repeatRequest" class="cta" style="display: none;">Request a new Bogpill</button>
+      <div style="position: relative">
+        <button type="button" id="c2c" class="cta" data-bogpost-format="standard" style="display: none;">Copy to Clipboard</button>
+        <small id="clipboard-status" style="position: absolute"></small>
+      </div>
     </section>
     <script src="../main.js" defer=""></script>
     <script>
@@ -64,7 +76,16 @@
 
         // Display loading message
         var responseSection = document.getElementById('responseSection');
-        responseSection.textContent = 'Generating Rundown...';
+        var clipboardStatus = document.getElementById('clipboard-status');
+        var c2cButtons = document.querySelectorAll('button.cta')
+
+        responseSection.textContent = 'Attempting to make contact...';
+        responseSection.setAttribute('data-loaded', false);
+        clipboardStatus.textContent = '';
+        
+        c2cButtons.forEach(function (btn) {
+          btn.setAttribute('disabled', 'disabled')
+        })
 
         xhr.onload = function() {
           if (xhr.status >= 200 && xhr.status < 300) {
@@ -77,6 +98,11 @@
               }).join('\n\n');
 
               responseSection.innerHTML = candidatesContent;
+              responseSection.setAttribute('data-loaded', true);
+              
+              c2cButtons.forEach(function (btn) {
+                btn.removeAttribute('disabled');
+              })
 
               // Show Copy to Clipboard and Repeat Request buttons
               document.getElementById('c2c').style.display = 'inline-block';

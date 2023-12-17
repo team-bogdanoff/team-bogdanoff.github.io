@@ -68,6 +68,13 @@ ul.bogpill-link-container li a {
   display: flex;
   flex-direction: column;
 }
+.flex-shrink-1{
+  flex-grow: 0;
+  flex-shrink: 1;
+}
+.flex-1 {
+  flex: 1;
+}
 .align-center {
   align-items: center;
 }
@@ -82,13 +89,13 @@ small#clipboard-status {
 small[data-failed] {
   color: red;
 }
-section[aria-labelledby=c2c] > *{
+section > .cta{
   flex-grow: 0;
 }
 section.homepage {
   margin: 30px auto;
 }
-button#c2c {
+button.cta {
   margin: 0 auto 5px;
   font-size: .9em;
 }
@@ -123,7 +130,7 @@ button#c2c {
     padding: 7px 20px;
     align-items: center;
   }
-  button#c2c {
+  button.cta {
     padding: 10px 20px;
     font-size: 1.1em;
     border-radius: var(--border-radius);
