@@ -97,6 +97,9 @@ section.homepage {
   font-size: .9em;
 }
 @media (max-width: 720px) {
+  body {
+    padding-bottom: 15px;
+  }
   article {
     max-width: 90vw;
   }
@@ -139,3 +142,4 @@ section.homepage {
     margin: 0;
   }
 }
+
